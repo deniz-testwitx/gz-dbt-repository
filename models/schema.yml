@@ -4,16 +4,42 @@ sources:
   - name: raw
     database: workintech-lecture
     schema: gz_raw_data_0226
-
     tables:
       - name: product
         description: Product table
         identifier: raw_gz_product
+        columns:
+          - name: products_id
+            description: ID for product
+            tests:
+              - unique
+              - not_null
       - name: sales
         description: Sales table
         identifier: raw_gz_sales
+        columns:
+          - name: orders_id
+            description: ID for order
+          - name: pdt_id
+            description: ID for product
+          - name: date_date
+            description: Date of sales transaction
+        tests:
+          - unique:
+              column_name: "(orders_id || '-' || pdt_id)"
+          - dbt_utils.unique_combination_of_columns:
+              arguments: 
+                combination_of_columns:
+                  - orders_id
+                  - pdt_id
       - name: ship
         description: Shipping table
         identifier: raw_gz_ship
-  
-  
+        columns:
+          - name: orders_id
+            description: ID for order
+            tests:
+              - unique
+              - not_null
+
+
