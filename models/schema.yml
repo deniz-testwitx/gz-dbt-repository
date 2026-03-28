@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw
+    database: workintech-lecture
+    schema: gz_raw_data_0226
+
+    tables:
+      - name: product
+        description: Product table
+        identifier: raw_gz_product
+      - name: sales
+        description: Sales table
+        identifier: raw_gz_sales
+      - name: ship
+        description: Shipping table
+        identifier: raw_gz_ship
+  
+  
