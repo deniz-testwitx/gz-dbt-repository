@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: raw
+    database: workintech-lecture
+    schema: raw_data_circle
+    tables:
+      - name: cc_parsel
+        identifier: raw_cc_parcel
+        columns:
+          - name: parcel_id
+            tests:
+              - unique
+              - not_null
+          - name: date_purchase
+            tests:
+              - not_null
+      - name: cc_parcel_product
+        identifier: raw_cc_parcel_product
+        columns:
+          - name: parcel_id
+            description: Parcel ID
+          - name: model_name
+            description: Model name            
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              arguments: 
+                combination_of_columns:
+                  - parcel_id
+                  - model_mame
