@@ -40,3 +40,9 @@ models:
     # Applies to all files under models/example/
     example:
       +materialized: table
+    circle_parcel:
+      +schema: parcel_dbt_dev
+      +materialized: table
+      staging:
+        +schema: parcel_dbt_dev_staging
+        +materialized: ephemeral
